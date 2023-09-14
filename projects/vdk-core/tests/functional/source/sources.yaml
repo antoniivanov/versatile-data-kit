@@ -1,0 +1,19 @@
+# Copyright 2021-2023 VMware, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+sources:
+  - type: StackOverflowAPI
+    id: "stackoverflow-qa"
+    config:
+      endpoint: "https://api.stackoverflow.com/questions"
+      headers:
+        Authorization: "Bearer {props.api_key}"
+      params:
+        tagged: "python;java"
+      offset_key: "question_id"
+
+destinations:
+  - type: huggingface_hub
+    id: "qa/answers-cleaned"
+    format: parquet
+    card_desc: "This dataset contains cleaned question answer pairs"
